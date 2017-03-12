@@ -1,6 +1,6 @@
 "use strict";
 
-import {TASK_ADD, TASK_EDIT, TASK_SET_TITLE, TASK_SET_DESCRIPTION, TASK_DELETE} from '../constants/task';
+import {TASK_ADD, TASK_EDIT, TASK_SET_TITLE, TASK_SET_DESCRIPTION, TASK_DELETE, TASK_COMPLETED} from '../constants/task';
 
 export const addTask = newTask => {
   return {
@@ -33,6 +33,13 @@ export const setDescriptionTask = (description, id) => {
 export const deleteTask = (id) => {
   return {
     type: TASK_DELETE,
+    payload: {id}
+  }
+}
+
+export const completedTask = (id) => {
+  return {
+    type: TASK_COMPLETED,
     payload: {id}
   }
 }

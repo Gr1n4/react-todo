@@ -48,65 +48,85 @@ class TaskList extends Component {
     this.props.deleteTask(id);
   }
 
+  completedTask(id) {
+    this.props.completedTask(id);
+  }
+
   render() {
     console.log('task list', this.props.tasks);
-    let classes = classNames('input-group', {
-      'has-error': this.state.hasError
-    });
+    let classes = {
+      formTitle: classNames(
+        'input-group',
+        {
+          'has-error': this.state.hasError
+        }
+      )
+    };
     return (
       <div className="row">
         <div className="task-list col-md-12">
           <ul>
             {this.props.tasks.map((item, index) =>
-              <li key={index} className="panel panel-default">
-                <i className="fa fa-trash fa-2x pull-right" onClick={this.deleteTask.bind(this, item.id)}></i>
-                <div className="panel-heading">
-                  {
-                    item.edit.title ?
-                    (
-                      <form className={classes} onSubmit={this.setTitle.bind(this, item.id)}>
-                        <input
-                          className="form-control"
-                          type="text"
-                          ref={(e) => this.titleInput = e}
-                          defaultValue={this.titleInputValue}
-                          onKeyUp={this.onEscape.bind(this, 'title', item)}
-                        />
-                      </form>
-                    ) :
-                    (
-                      <h3 className="panel-title" onClick={this.editTask.bind(this, 'title', item)}>
-                        {item.title}
-                      </h3>
-                    )
-                  }
+              <li key={index}>
+                <div className="checkbox col-md-1">
+                  <label htmlFor="">
+                    <input
+                      type="checkbox"
+                      checked={item.completed}
+                      onClick={this.completedTask.bind(this, item.id)}
+                    />
+                  </label>
                 </div>
-                <div className="panel-body">
-                  {
-                    item.edit.description ?
-                    (
-                      <form className="input-group" onSubmit={this.setDescription.bind(this, item.id)}>
-                        <input
-                          className="form-control"
-                          type="text"
-                          ref={(e) => this.descriptionInput = e}
-                          defaultValue={this.descriptionInputValue}
-                          onKeyUp={this.onEscape.bind(this, 'description', item)}
-                        />
-                      </form>
-                    ) :
-                    (
-                      item.description && item.description.length ?
+                <div className="panel panel-default col-md-11">
+                  <i className="fa fa-trash fa-2x pull-right" onClick={this.deleteTask.bind(this, item.id)}></i>
+                  <div className="panel-heading">
+                    {
+                      item.edit.title ?
                         (
-                          <p onClick={this.editTask.bind(this, 'description', item)}>
-                            {item.description}
-                          </p>
+                          <form className={classes.formTitle} onSubmit={this.setTitle.bind(this, item.id)}>
+                            <input
+                              className="form-control"
+                              type="text"
+                              ref={(e) => this.titleInput = e}
+                              defaultValue={this.titleInputValue}
+                              onKeyUp={this.onEscape.bind(this, 'title', item)}
+                            />
+                          </form>
                         ) :
                         (
-                          <i className="fa fa-plus" onClick={this.editTask.bind(this, 'description', item)}></i>
+                          <h3 className="panel-title" onClick={this.editTask.bind(this, 'title', item)}>
+                            {item.title}
+                          </h3>
                         )
-                    )
-                  }
+                    }
+                  </div>
+                  <div className="panel-body">
+                    {
+                      item.edit.description ?
+                        (
+                          <form className="input-group" onSubmit={this.setDescription.bind(this, item.id)}>
+                            <input
+                              className="form-control"
+                              type="text"
+                              ref={(e) => this.descriptionInput = e}
+                              defaultValue={this.descriptionInputValue}
+                              onKeyUp={this.onEscape.bind(this, 'description', item)}
+                            />
+                          </form>
+                        ) :
+                        (
+                          item.description && item.description.length ?
+                            (
+                              <p onClick={this.editTask.bind(this, 'description', item)}>
+                                {item.description}
+                              </p>
+                            ) :
+                            (
+                              <i className="fa fa-plus" onClick={this.editTask.bind(this, 'description', item)}></i>
+                            )
+                        )
+                    }
+                  </div>
                 </div>
               </li>
             )}
@@ -136,6 +156,9 @@ const mapDispatchToProps = dispatch => {
     },
     deleteTask: id => {
       dispatch(taskAction.deleteTask(id));
+    },
+    completedTask: id => {
+      dispatch(taskAction.completedTask(id));
     }
   }
 };
