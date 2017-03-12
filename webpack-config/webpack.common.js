@@ -34,15 +34,15 @@ module.exports = {
       {
         test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
         loader: 'file-loader?name=assets/[name].[hash].[ext]'
-      },
+      }, // TODO: Need finished extract css
+      // {
+      //   test: /\.sass$/,
+      //   exclude: helpers.root('src', 'app'),
+      //   loader: ExtractTextPlugin.extract({fallbackLoader: 'style-loader', loader: 'style-loader!css-loader?sourceMap!resolve-url-loader!sass-loader?sourceMap'})
+      // },
       {
         test: /\.sass$/,
-        exclude: helpers.root('src', 'app'),
-        loader: ExtractTextPlugin.extract({fallbackLoader: 'style-loader', loader: 'css-loader?sourceMap!resolve-url-loader!sass-loader?sourceMap'})
-      },
-      {
-        test: /\.sass$/,
-        include: helpers.root('src', 'app'),
+        // include: helpers.root('src', 'app'),
         loader: 'style-loader!css-loader?sourceMap!resolve-url-loader!sass-loader?sourceMap'
       },
     ]
