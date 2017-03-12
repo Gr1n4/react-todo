@@ -2,12 +2,19 @@
 
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import classNames from 'classnames';
 
 import * as taskAction from '../actions/task.action';
 
 import './task-list.sass';
 
 class TaskList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      hasError: false
+    };
+  }
   editTask(editField, task, e) {
     e.stopPropagation();
     this[`${editField}InputValue`] = task[editField];
@@ -16,8 +23,13 @@ class TaskList extends Component {
 
   setTitle(id, e) {
     e.preventDefault();
-    this.props.setTitleTask(this.titleInput.value, id);
-    this.props.editTask('title', id);
+    if (this.titleInput.value && this.titleInput.value.length) {
+      this.setState({hasError: false});
+      this.props.setTitleTask(this.titleInput.value, id);
+      this.props.editTask('title', id);
+    } else {
+      this.setState({hasError: true});
+    }
   }
 
   setDescription(id, e) {
@@ -34,6 +46,9 @@ class TaskList extends Component {
 
   render() {
     console.log('task list', this.props.tasks);
+    let classes = classNames('input-group', {
+      'has-error': this.state.hasError
+    });
     return (
       <div className="row">
         <div className="task-list col-md-12">
@@ -44,7 +59,7 @@ class TaskList extends Component {
                   {
                     item.edit.title ?
                     (
-                      <form className="input-group" onSubmit={this.setTitle.bind(this, item.id)}>
+                      <form className={classes} onSubmit={this.setTitle.bind(this, item.id)}>
                         <input
                           className="form-control"
                           type="text"
