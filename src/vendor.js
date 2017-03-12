@@ -1,4 +1,6 @@
 "use strict";
 
-import {React} from 'react';
-import {ReactDOM} from 'react-dom';
+import 'react';
+import 'react-dom';
+import 'redux';
+import 'react-redux';
