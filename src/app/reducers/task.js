@@ -1,6 +1,6 @@
 "use strict";
 
-import {TASK_ADD, TASK_EDIT, TASK_SET_DESCRIPTION, TASK_SET_TITLE} from '../constants/task';
+import {TASK_ADD, TASK_EDIT, TASK_SET_DESCRIPTION, TASK_SET_TITLE, TASK_DELETE} from '../constants/task';
 
 export default function taskReducer(state = [], action) {
   switch (action.type) {
@@ -39,6 +39,9 @@ export default function taskReducer(state = [], action) {
       break;
     case TASK_SET_TITLE:
       return state.map(item => item.id === action.payload.id ? {...item, title: action.payload.title} : item);
+      break;
+    case TASK_DELETE:
+      return state.filter(item => item.id !== action.payload.id);
       break;
     default:
       return state

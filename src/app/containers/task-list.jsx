@@ -9,8 +9,8 @@ import * as taskAction from '../actions/task.action';
 import './task-list.sass';
 
 class TaskList extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       hasError: false
     };
@@ -44,6 +44,10 @@ class TaskList extends Component {
     }
   }
 
+  deleteTask(id) {
+    this.props.deleteTask(id);
+  }
+
   render() {
     console.log('task list', this.props.tasks);
     let classes = classNames('input-group', {
@@ -55,6 +59,7 @@ class TaskList extends Component {
           <ul>
             {this.props.tasks.map((item, index) =>
               <li key={index} className="panel panel-default">
+                <i className="fa fa-trash fa-2x pull-right" onClick={this.deleteTask.bind(this, item.id)}></i>
                 <div className="panel-heading">
                   {
                     item.edit.title ?
@@ -128,6 +133,9 @@ const mapDispatchToProps = dispatch => {
     },
     setDescriptionTask: (description, id) => {
       dispatch(taskAction.setDescriptionTask(description, id));
+    },
+    deleteTask: id => {
+      dispatch(taskAction.deleteTask(id));
     }
   }
 };
