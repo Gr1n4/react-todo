@@ -1,6 +1,7 @@
 "use strict";
 
 import React from 'react';
+import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 import * as taskAction from '../actions/task.action';
@@ -8,22 +9,21 @@ import * as taskAction from '../actions/task.action';
 import './app.sass';
 
 import TaskInput from '../components/task-input';
-import TaskList from '../containers/task-list';
+import TaskList from '../components/task-list';
 
 class App extends React.Component {
   addTask(taskInput, e) {
     e.preventDefault();
-    this.props.addTask(taskInput.value);
+    this.props.actions.addTask(taskInput.value);
     taskInput.value = '';
   }
 
   render() {
-    console.log(this.props.todos);
     return (
       <div className="container">
         <h1>Task List</h1>
         <TaskInput addTask={this.addTask.bind(this)}/>
-        <TaskList/>
+        <TaskList tasks={this.props.tasks} actions={this.props.actions}/>
       </div>
     )
   }
@@ -31,15 +31,13 @@ class App extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    todos: state
+    tasks: state
   }
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    addTask: newTask => {
-      dispatch(taskAction.addTask(newTask));
-    }
+    actions: bindActionCreators(taskAction, dispatch)
   }
 };
 

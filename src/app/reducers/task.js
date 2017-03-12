@@ -2,7 +2,16 @@
 
 import {TASK_ADD, TASK_EDIT, TASK_SET_DESCRIPTION, TASK_SET_TITLE, TASK_DELETE, TASK_COMPLETED} from '../constants/task';
 
-export default function taskReducer(state = [], action) {
+const initialState = [
+  {
+    id: Date.now().toString(),
+    title: 'task 1',
+    description: 'task 1 description',
+    completed: false,
+  }
+]
+
+export default function taskReducer(state = initialState, action) {
   switch (action.type) {
     case TASK_ADD:
       return [
@@ -12,27 +21,8 @@ export default function taskReducer(state = [], action) {
           title: action.payload,
           description: '',
           completed: false,
-          edit: {
-            title: false,
-            description: false
-          }
         }
       ];
-      break;
-    case TASK_EDIT:
-      return state.map(item => {
-        if (item.id === action.payload.id) {
-          return {
-            ...item,
-            edit: {
-              ...item.edit,
-              [action.payload.editField]: !item.edit[action.payload.editField]
-            }
-          }
-        } else {
-          return item;
-        }
-      });
       break;
     case TASK_SET_DESCRIPTION:
       return state.map(item => item.id === action.payload.id ? {...item, description: action.payload.description} : item);
