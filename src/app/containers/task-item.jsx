@@ -85,7 +85,7 @@ class TaskItem extends Component {
           </label>
         </div>
         <div className={classes.panel}>
-          <i className="fa fa-trash fa-2x pull-right" onClick={this.deleteTask.bind(this)}></i>
+          <i className="fa fa-trash fa-2x pull-right remove-icon" onClick={this.deleteTask.bind(this)}></i>
           <div className="panel-heading">
             {
               this.state.edit.title ?

@@ -1,7 +1,13 @@
 "use strict";
 
-import {createStore} from 'redux';
+// import {combineReducers} from 'redux';
+// import {routerReducer} from 'react-router-redux';
 
 import taskReducer from './task';
+import boardReducer from './board';
 
-export default createStore(taskReducer);
+export default {
+  task: taskReducer,
+  board: boardReducer,
+  // routing: routerReducer
+}
