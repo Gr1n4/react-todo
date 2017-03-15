@@ -4,6 +4,7 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
+
 import * as boardAction from '../../actions/board.action';
 
 import List from '../list/list';
@@ -14,13 +15,26 @@ class BoardCurrent extends Component {
     this.board = boards.filter(item => item.id === match.params.id)[0];
   }
 
+  componentDidMount() {
+    if (!this.board) {
+      this.props.history.push('/');
+    }
+  }
+
   render() {
     const {boards, actions, match} = this.props;
     const board = this.board
     return (
       <div className="board-current">
-        <h1>{board.title}</h1>
-        <List boardId={match.params.id} />
+      {
+        board ?
+          (
+            <div>
+              <h1>{board.title}</h1>
+              <List boardId={match.params.id} />
+            </div>
+          ) : (null)
+      }
       </div>
     )
   }

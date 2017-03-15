@@ -18,6 +18,7 @@ class Board extends Component {
 
   render() {
     const {boards, actions} = this.props;
+    console.log('boards', boards);
     return (
       <div>
         <h1>Boards</h1>
