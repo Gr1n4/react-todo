@@ -9,7 +9,7 @@ const initialState = [
     description: 'task 1 description',
     completed: false,
   }
-]
+];
 
 export default function taskReducer(state = initialState, action) {
   switch (action.type) {

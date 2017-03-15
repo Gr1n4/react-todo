@@ -6,12 +6,26 @@ import {connect} from 'react-redux';
 
 import * as boardAction from '../../actions/board.action';
 
+import BoardList from '../../components/board-list';
+import TaskInput from '../../components/task-input';
+
 class Board extends Component {
+  addBoard(input, e) {
+    e.preventDefault();
+    this.props.actions.addBoard(input.value);
+    input.value = '';
+  }
 
   render() {
-    console.log(this.props.boards);
+    const {boards, actions} = this.props;
     return (
-      <h1>Boards</h1>
+      <div>
+        <h1>Boards</h1>
+        <TaskInput addTask={this.addBoard.bind(this)} />
+        <BoardList
+          {...this.props}
+        />
+      </div>
     )
   }
 }
