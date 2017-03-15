@@ -6,22 +6,21 @@ import {connect} from 'react-redux';
 
 import * as boardAction from '../../actions/board.action';
 
+import List from '../list/list';
+
 class BoardCurrent extends Component {
   constructor({boards, match}) {
     super();
     this.board = boards.filter(item => item.id === match.params.id)[0];
-    console.log('board', this.board);
-    console.log('boards', boards);
-    console.log(match);
   }
 
   render() {
-    const {boards, actions} = this.props;
+    const {boards, actions, match} = this.props;
     const board = this.board
-    console.log('board render', this.board);
     return (
       <div className="board-current">
         <h1>{board.title}</h1>
+        <List boardId={match.params.id} />
       </div>
     )
   }

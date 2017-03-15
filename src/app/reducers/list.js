@@ -2,13 +2,7 @@
 
 import {LIST_ADD} from '../constants/list';
 
-const initialState = [
-  {
-    id: Date.now().toString(),
-    title: 'task 1',
-    description: 'task 1 description',
-  }
-];
+const initialState = [];
 
 export default function listReducer(state = initialState, {type, payload}) {
   switch (type) {
@@ -17,6 +11,7 @@ export default function listReducer(state = initialState, {type, payload}) {
         ...state,
         {
           id: Date.now().toString(),
+          boardId: payload.boardId,
           title: payload.title,
           description: '',
         }
