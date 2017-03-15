@@ -1,6 +1,7 @@
 "use strict";
 
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 
 import './board-item.sass';
 
@@ -13,6 +14,9 @@ export default class BoardItem extends Component {
         <div className="my-jumbotron">
           <h2>{board.title}</h2>
           <p>{board.description}</p>
+          <button className="btn btn-primary">
+            <Link to={`/board/${board.id}`} >Detail</Link>
+          </button>
         </div>
       </div>
     )
