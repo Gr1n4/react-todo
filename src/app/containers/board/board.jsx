@@ -3,6 +3,7 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import * as boardAction from '../../actions/board.action';
 
@@ -18,10 +19,10 @@ class Board extends Component {
 
   render() {
     const {boards, actions} = this.props;
-    console.log('boards', boards);
     return (
       <div>
         <h1>Boards</h1>
+        <RaisedButton label="default"/>
         <TaskInput addTask={this.addBoard.bind(this)} />
         <BoardList
           {...this.props}

@@ -10,18 +10,18 @@ const initialState = [
   }
 ];
 
-export default function boardReducer(state = initialState, action) {
-  switch (action.type) {
+export default function boardReducer(state = initialState, {type, payload}) {
+  switch (type) {
     case BOARD_ADD:
       return [
         ...state,
         {
           id: Date.now().toString(),
-          title: action.payload.title,
           description: '',
+          ...payload
+          // title: payload.title,
         }
       ];
-      break;
     default:
       return state;
   }

@@ -1,7 +1,7 @@
 {
-  "name": "react-training",
+  "name": "react-todo",
   "version": "1.0.0",
-  "description": "",
+  "description": "React todo project with material design",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,7 +10,7 @@
     "clear:build": "node_modules/.bin/rimraf static"
   },
   "keywords": [],
-  "author": "",
+  "author": "Gr1nch",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.23.1",
@@ -35,6 +35,7 @@
     "bootstrap": "^3.3.7",
     "classnames": "^2.2.5",
     "font-awesome": "^4.7.0",
+    "material-ui": "^0.20.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.7",

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import './app.sass';
 
@@ -12,14 +13,16 @@ import BoardCurrent from './board/board-current';
 
 const App = () => {
   return (
-    <Router>
-      <div>
-        <Route exact path="/" component={Board} />
-        <Route path="/tasks" component={Task}/>
-        <Route path="/lists" component={List}/>
-        <Route path="/board/:id" component={BoardCurrent}/>
-      </div>
-    </Router>
+    <MuiThemeProvider>
+      <Router>
+        <div>
+          <Route exact path="/" component={Board} />
+          <Route path="/tasks" component={Task}/>
+          <Route path="/lists" component={List}/>
+          <Route path="/board/:id" component={BoardCurrent}/>
+        </div>
+      </Router>
+    </MuiThemeProvider>
   )
 }
 
