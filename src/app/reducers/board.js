@@ -1,6 +1,6 @@
 "use strict";
 
-import {BOARD_ADD} from '../constants/board';
+import {BOARD_ADD, BOARD_EDIT_TITLE} from '../constants/board';
 
 const initialState = [
   {
@@ -22,6 +22,9 @@ export default function boardReducer(state = initialState, {type, payload}) {
           // title: payload.title,
         }
       ];
+    
+    case BOARD_EDIT_TITLE:
+      return state.map(item => item.id === payload.id ? {...item, title: payload.title} : item);
     default:
       return state;
   }
