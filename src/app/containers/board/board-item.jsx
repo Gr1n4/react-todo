@@ -5,6 +5,9 @@ import {Link} from 'react-router-dom';
 
 import './board-item.sass';
 
+/**
+ * @deprecated
+ */
 export default class BoardItem extends Component {
 
   render() {

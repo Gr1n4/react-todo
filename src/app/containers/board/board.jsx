@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
@@ -7,8 +7,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 import * as boardAction from '../../actions/board.action';
 
-import BoardList from '../../components/board-list';
-import TaskInput from '../../components/task-input';
+import BoardList from '../../components/board/board-list';
 import AddEntity from '../../components/common/add-entity';
 
 class Board extends Component {

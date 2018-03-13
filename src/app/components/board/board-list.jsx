@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import BoardItem from '../containers/board/board-item';
+import BoardItem from './board-item';
 
 const BoardList = ({boards, actions}) => {
   return (
