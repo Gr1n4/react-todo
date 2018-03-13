@@ -9,12 +9,14 @@ import * as boardAction from '../../actions/board.action';
 
 import BoardList from '../../components/board-list';
 import TaskInput from '../../components/task-input';
+import AddEntity from '../../components/common/add-entity';
 
 class Board extends Component {
-  addBoard(input, e) {
-    e.preventDefault();
-    this.props.actions.addBoard(input.value);
-    input.value = '';
+  addBoard(input) {
+    if (!input || !input.length) {
+      return;
+    }
+    this.props.actions.addBoard(input);
   }
 
   render() {
@@ -22,8 +24,7 @@ class Board extends Component {
     return (
       <div>
         <h1>Boards</h1>
-        <RaisedButton label="default"/>
-        <TaskInput addTask={this.addBoard.bind(this)} />
+        <AddEntity addTask={this.addBoard.bind(this)} />
         <BoardList
           {...this.props}
         />
