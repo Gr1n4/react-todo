@@ -1,1 +1,2 @@
 # React training
+some changes
